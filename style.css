@@ -1,0 +1,132 @@
+* {
+    font-family: -apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕",helvetica,"Apple SD Gothic Neo",sans-serif;
+}
+ 
+body {
+    background-color: rgb(39, 35, 37);
+    color: rgb(255, 246, 230);
+    margin: 0px; 
+}
+
+ul{ 
+    list-style-type: none;
+    padding: 0px 0px;
+    margin-top: 0px;
+}
+
+li {
+    padding : 1vh 1vh 1vh 2vh;
+    border-bottom: 1px solid #414141;
+}
+
+.material-symbols-outlined {
+  font-size: 4em;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 100,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.material-symbols-outlined.dis{
+    color: #474747; 
+}
+
+/* input 숨겨준다 */
+input[type=checkbox].onoff{
+    display:none;
+}
+
+input[type=checkbox].onoff + label{
+    cursor:pointer;
+}
+
+input[type=checkbox].onoff + label > span{
+    vertical-align: middle;
+    padding-left: 15px;
+    user-select: none;
+}
+
+input[type=checkbox].onoff + label:before{
+    font-size: 2em;
+    font-family: "Material Symbols Outlined";
+    vertical-align: middle;
+    display:inline-block;
+}
+
+input[type=checkbox].onoff:checked + label:before{
+    font-size: 2em;
+    font-family: "Material Symbols Outlined";
+    vertical-align: middle;
+
+}
+
+input[type=checkbox].list + label{
+    width: 100%;
+    display: inline-block;
+}
+
+input[type=checkbox].onoff.check + label:before{
+    content:"\e835";
+}
+
+input[type=checkbox].onoff.check:checked + label:before{
+    content:"\e834";
+}
+
+.control-button {
+    font-size: 2em;
+    vertical-align: middle;
+    display:inline-block;
+    border: 1px solid #999;
+    padding-right: 6px;
+    border-radius: 6px;
+}
+
+.control-button.play::before {
+    content:"\e037"; 
+    font-family: "Material Symbols Outlined";
+    vertical-align: middle;
+}
+
+#app_title {
+    background-color: #202126;
+    padding: 20px;
+    border-bottom: 1px solid #3b415d;
+    font-size: 3em;
+}
+
+#word_card {
+    padding: 10px;
+}
+
+#word {
+    font-size: 6vw;
+    color: #b9b9b9;
+    border: 3px solid #505565;
+    padding: 20px;
+    line-height: 1.6em;
+
+}
+
+#mean {
+    margin-top : 10px;
+    font-size: 6vw;
+    color: #b9b9b9;
+    border: 3px solid #323233;
+    padding: 20px;
+    height: 20%;
+    line-height: 1.6em;
+
+}
+
+#comment {
+    margin-top : 10px;
+    font-size: 4vw;
+    color: #b9b9b9;
+    border: 3px solid #323233;
+    padding: 20px;
+    height: 20%;
+    line-height: 1.6em;
+
+}

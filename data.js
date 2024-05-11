@@ -372,4 +372,40 @@ After I got home, I began to write a new graphic novel.	집에 도착한 후, �
 I modeled her on Ms. Lee, one of our cafeteria workers.	나는 우리 학교 식당 직원 중 한 명인 리씨 선생님을 본받았다.
 Each house is big enough for a whole village.	각 집은 한 마을 전체를 수용할 만큼 크다.
 Centuries ago in southern Italy, people who had a house without a roof paid lower taxes.	수세기 전 남부 이탈리아에서 지붕이 없는 집을 가진 사람들은 낮은 세금을 납부했다.
+
+지환영어3과 단어
+actually	사실은, 정말로
+admire	존경하다, 감탄하며 바라보다
+appear	나타나다
+disappear	사라지다
+avatar	아바타
+bungee jumping	번지점프
+capture	잡다, 포착하다
+college	(단과) 대학
+expect	예상하다, 기대하다
+finally	마침내, 결국 s at last
+foreign	외국의
+graduate	졸업하다
+hall	홀, 회관
+huge	거대한
+Indian	인도(인)의, 인도인
+indoors	실내에서
+outdoors	건물 밖에서, 옥외에서
+journal	일기r(=dialry)
+moment	순간
+mysterious	신비한, 불가사의
+object	물건, 사물
+owner	주인, 소유자. + own 소유하다; 자기 자신의
+pack	짐을 싸다(챙기다)
+perfect	완벽한
+plate	접시, 그릇
+portrait	초상화
+quite	꽤, 상당히 cf. quiet 조용한
+remain	여전히 ~이다, 남아 있다
+scary	무서운. 겁나는
+simple	단순한, 간단한
+temple	절, 사원
+traditional	전통적인
+university	(종합) 대학
+weather forecast	일기예보
 `;

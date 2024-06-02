@@ -58,6 +58,8 @@ class Word {
             else{
                 _this.conf.soundSpeed = 1.0;    
             }
+
+            _this.conf.soundSpeed = 1.0;    
         });
     }
 

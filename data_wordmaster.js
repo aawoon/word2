@@ -1,5 +1,51 @@
 let word_string = 
-`Day 01 - Characters
+`1~7 ㅌㅡㄹㄹㅣㄴㅁㅜㄴㅈㅔ
+clever	영리한, 재치 있는
+gentle	부드러운, 온화한
+funny	웃기는, 우스꽝스러운
+calm	차분한, 침착한
+mean	야비한, 비열한
+cautious	조심스러운, 신중한, 조심하는
+slim	호리호리한, 가냘픈, 날씬한
+plain	평범하게 생긴
+fit	건강한, 적합하다, 꼭 맞다
+muscular	근육질의, 건장한
+bald	대머리의
+appearance	외모
+attractive	매력적인
+charming	매력적인, 멋진
+mustache	코밑수염
+sideburns	구레나룻
+middle-aged	중년의
+laugh	웃다
+regret	유감, 후회, 후회하다
+grateful	감사하는, 고맙게 여기는
+delighted	매우 기뻐하는
+depressed	의기소침한, 낙담한, 우울한
+frightened	깜짝 놀란, 겁이 난
+ashamed	부끄러워하는
+sympathy	동정
+satisfied	만족한
+disappointed	실망한, 낙담한
+amused	즐기는, 즐거워하는
+captain	선장
+reporter	기자, 통신원
+clerk	점원
+carpenter	목수
+teller	금전출납원
+secretary	비서
+shorts	반바지, 운동 팬츠
+button	단추, ~에 단추를 채우다
+suit	정장, 슈트, ~에게 잘 어울리다
+wallet	지갑
+purse	돈주머니, 지갑
+overalls	멜빵 바지
+athletic shoes	운동화
+pour	붓다
+cabinet	진열대
+blender	부엌용 믹서기
+
+Day 01 - Characters
 kind	친절한, 상냥한
 clever	영리한, 재치 있는
 wise	지혜로운, 슬기로운

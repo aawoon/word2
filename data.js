@@ -395,7 +395,7 @@ journal	일기r(=dialry)
 moment	순간
 mysterious	신비한, 불가사의
 object	물건, 사물
-owner	주인, 소유자. + own 소유하다; 자기 자신의
+owner	주인, 소유자.+ own 소유하다; 자기 자신의
 pack	짐을 싸다(챙기다)
 perfect	완벽한
 plate	접시, 그릇

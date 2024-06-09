@@ -1,4 +1,4 @@
-const APP_TITLE = "ENGLISH STUDY HARD";
+const APP_TITLE = "✏️ ReMember";
 
 class Word {
     contId = "";
@@ -9,8 +9,13 @@ class Word {
 
     todoList = [];
     todoIdx = 0;
+    todoWord = "";
     exerCnt = 0;
-    status = "ready"; // ready, playing, pause
+    state = "ready"; // ready, playing, pause
+
+    buttons = {};
+
+    historyIndex = [];
 
     conf = {
         random : true,      // 랜덤Play
@@ -22,6 +27,7 @@ class Word {
         wordsound : true,   // 단어 TTS
         meansound : true,    // 뜻 TTS
         loop : true,
+
     }
 
     constructor(contId, str) {
@@ -97,7 +103,7 @@ class Word {
 
     
     #genButton(text, clas){
-        return $("<div/>", {text:text, class:"control-button play"});
+        return $("<div/>", {text:text, class:"control-button " + clas});
     }
 
     #genOnOffButton(text, clas, name, value){
@@ -110,6 +116,7 @@ class Word {
     genChapterList(){
         this.cont.html("");
         const appTitle = $("<div/>", {id:"app_title", text: APP_TITLE});
+        
 
         const chapterList = $("<div/>", {id:"chapter_list"});
         const title = $("<div/>", {class:"main-title"});
@@ -124,13 +131,13 @@ class Word {
             //     .append( $("<label/>", {for:"chapter"+i}).append( $("<span/>", {text:this.db[i].title})));
             // ul.append(li);
         }
+        ul.append($("<li/>", {text:""}));
+        ul.append($("<li/>", {text:""}));  
         //const playButton = $("<div/>", {text:"play", class:"control-button onoff play"}); 
-        const playButton = this.#genButton("play", "play");
-
+        
         chapterList
             .append(title)
-            .append(ul)
-            .append(playButton); 
+            .append(ul)          
         this.cont.append(appTitle); 
         this.cont.append(`
             <div id="control_panel" style="display: none;">
@@ -153,26 +160,108 @@ class Word {
         this.cont.append(chapterList);
 
         const wordCard = $("<div/>", {id:"word_card"}); 
+        const wordDiv = $("<div/>", {id:"wordDiv"}); 
         const word = $("<div/>", {id:"word"}); 
+        const meanDiv = $("<div/>", {id:"meanDiv"});
         const mean = $("<div/>", {id:"mean"}); 
         const comment = $("<div/>", {id:"comment"}); 
-        const shuffleButton = $("<div/>", {text:"🔀  ⬅️🔀 shuffle", class:"control-button shuffle"}); 
-        const pauseButton = $("<div/>", {text:"pause", class:"control-button pause"}); 
-        const backButton  = $("<div/>", {text:"⬅️ back" , class:"control-button back"}); 
+        wordDiv.append(word);
+        meanDiv.append(mean);
+
         wordCard
-            .append(word)
-            .append(mean)
+            .append(wordDiv)
+            .append(meanDiv)
             .append(comment);
 
-        wordCard.append(shuffleButton);
-        wordCard.append(pauseButton);
-        wordCard.append(backButton);
-        wordCard.hide(); 
+        const wordNextButton = $("<div/>", {id:"wordNextButton"});    
+        const wordPrevButton = $("<div/>", {id:"wordPrevButton"});    
+        wordDiv.append(wordNextButton); 
+        wordDiv.append(wordPrevButton); 
+        
+        const footer = $("<div/>", {id:"footer"}); 
+        
+        const startButton   = this.#genButton("start", "start"); // $("<div/>", {text:"play", class:"control-button play"});
+        const playButton    = this.#genButton("play", "play"); // $("<div/>", {text:"play", class:"control-button play"});
+        const shuffleButton = this.#genButton("🔀", "shuffle"); //$("<div/>", {text:"🔀  ⬅️🔀 shuffle", class:"control-button shuffle"}); 
+        const pauseButton   = this.#genButton("pause", "pause"); // $("<div/>", {text:"pause", class:"control-button pause"}); 
+        const backButton    = this.#genButton("⬅️ back", "back"); //$("<div/>", {text:"⬅️ back" , class:"control-button back"}); 
+        
+        footer.append(startButton);
+        footer.append(playButton.hide());
+        footer.append(shuffleButton.hide());
+        footer.append(pauseButton.hide());
+        footer.append(backButton.hide());
+       
         this.cont.append(wordCard);
+        this.cont.append(footer);
+        
+        wordCard.hide(); 
+
+        const starWords = $("<div/>", {id:"starWords", text:"AA"});
+        $("body").append(starWords);
+
+        this.buttons = {
+            start : startButton,
+            play : playButton,
+            shuffle : shuffleButton,
+            pause : pauseButton,
+            back : backButton
+        }
+        
 
         let _this = this;
+
+        startButton.on("click", function(e){
+            //_this.play();  
+            _this.buttons.start.hide();
+            
+            _this.buttons.play.show();
+            _this.buttons.shuffle.show(); 
+            _this.buttons.pause.show();
+            _this.buttons.back.show(); 
+
+            _this.start();
+        });
+
+        word.on("click", function(e){
+            _this.checkword();
+        });
+
+        $("body").on("keydown", function(e){
+            switch( e.key ){
+                case " " : 
+                    _this.checkword();
+                    break;
+                case "ArrowLeft" : 
+                    _this.prevWord(true);
+                    break;
+                case "ArrowRight" :
+                    _this.nextWord(true);
+                    break;        
+                case "ArrowUp" : 
+                    _this.regStarWord(_this.todoWord);
+                    break; 
+
+            }
+            
+        });
+
+        
+
+        wordNextButton.on("click", function(e){
+            _this.nextWord(true); 
+        });
+
+        wordPrevButton.on("click", function(e){
+            _this.prevWord(true); 
+        });
+
         playButton.on("click", function(e){
-            _this.play();            
+            _this.play();  
+            _this.buttons.play.hide();
+            _this.buttons.pause.show();
+            _this.buttons.shuffle.show(); 
+            _this.buttons.back.show(); 
         });
 
         shuffleButton.on("click", function(e){
@@ -181,26 +270,32 @@ class Word {
 
         pauseButton.on("click", function(e){
             //_this.play();    
-            if( _this.status == "playing" ){
+            if( _this.state == "playing" ){
                 _this.pause();
                 
             }
-            else if( _this.status == "pause" ){
+            else if( _this.state == "pause" ){
                 _this.resume();
             }
 
             
         });
-
+ 
         backButton.on("click", function(e){
             _this.back(); 
-        });
-        
 
+            _this.buttons.shuffle.hide(); 
+            _this.buttons.pause.hide();
+            _this.buttons.back.hide(); 
+            _this.buttons.play.hide(); 
+
+            _this.buttons.start.show(); 
+
+        });
     }
 
-    play(){
-       let list = $('input:checkbox[name="checkedList"]:checked');
+    start(){
+        let list = $('input:checkbox[name="checkedList"]:checked');
         if(list.length==0){
             alert('no selected item. please select one.');
             return;
@@ -216,9 +311,25 @@ class Word {
             let idx = $(list[i]).val()*1;
             this.todoList = this.todoList.concat( this.db[idx].list ); 
         }
+        this.nextWord();
+        this.state = "pause";
+    }
+
+    // 현재 word확인
+    checkword(){
+
+        console.log(this.todoWord);
+        if( this.conf.sound ){
+            window.speechSynthesis.cancel();
+            speech(this.todoWord, this.conf.soundSpeed);
+        } 
+    }
+
+    play(){
+       
         //this.shuffle(this.todoList);    
         this.nextWord();
-        this.status = "playing";
+        this.state = "playing";
 
         $(".control-button.play").hide();
     }
@@ -233,12 +344,23 @@ class Word {
         wordsound : true,   // 단어 TTS
         meansound : true    // 뜻 TTS
     } */ 
-    nextWord(){
-        if( this.status == "pause" ) return; 
+
+    prevWord(){
+        if( this.todoIdx - 2 < 0  ){
+            return;
+            //this.todoIdx = this.todoList.length-1;
+        }
+        this.todoIdx = this.todoIdx - 2;
+        
+        this.nextWord(true);
+    }
+
+    nextWord(force){
+        if( this.state == "pause" && !force ) return; 
         
         $("#word").html("");
         $("#mean").html("");
-        $("#comment").html("this is comment");
+        $("#comment").html("");
         
         //let idx = parseInt(Math.random()*10000%this.todoLen);
         //console.log(this.todoIdx);
@@ -249,45 +371,56 @@ class Word {
             this.todoIdx = 0;
         } 
         
-        $("#word").html(word);  
+        $("#word").html(word);
+        this.todoWord = word;
+              
         if( this.conf.sound ){
             window.speechSynthesis.cancel();
             speech(word, this.conf.soundSpeed);
         } 
         
+        this.nextMean(mean);
+        /*
         let _this = this;
         this.tout1 = setTimeout(function(){
             _this.nextMean(mean);
         }, this.conf.delay);
+        */
     }
 
     nextMean(mean){
-        if( this.status == "pause" ) return;
+        //if( this.state == "pause" ) return; 
         
         $("#mean").html(mean);
         
+        /*
         if( this.conf.sound ){
             window.speechSynthesis.cancel();
             speech(mean, this.conf.soundSpeed);
         }
-
         let _this = this;
         this.tout2 = setTimeout(function(){
             _this.nextWord();
         }, this.conf.delay);
+        */
 
         this.exerCnt++;
     }
 
+    regStarWord(word){
+
+        $("#starWords").append( $("<span/>", {class:"star-word", text: word}) );
+    }
+
     pause(){
         window.speechSynthesis.cancel();
-        this.status = "pause";
+        this.state = "pause";
         $(".control-button.pause").text("▶️ resume");
     }
 
     resume(){
-        if( this.status == "pause" )
-            this.status = "playing";
+        if( this.state == "pause" )
+            this.state = "playing";
         
         $(".control-button.pause").text("⏸ pause");
         this.nextWord();
@@ -301,7 +434,7 @@ class Word {
         if( this.tout2 ){
             clearTimeout(this.tout2);
         }
-        this.status = "ready";
+        this.state = "ready";
         
         $(".control-button.play").show();
         $("#control_panel").hide();

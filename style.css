@@ -6,6 +6,7 @@ body {
     background-color: rgb(39, 35, 37);
     color: rgb(255, 246, 230);
     margin: 0px; 
+    user-select: none;
 }
 
 ul{ 
@@ -83,8 +84,51 @@ input[type=checkbox].onoff.check:checked + label:before{
     border-radius: 6px;
 }
 
+#wordNextButton {
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    font-size: 12vw;
+    color: #383838;
+    
+}
+
+#wordNextButton:hover{
+    color: #535353;
+}
+
+#wordPrevButton {
+    position: absolute;
+    bottom: 0;
+    left: 26px;
+    font-size: 12vw;
+    color: #383838;
+}
+
+#wordPrevButton:hover{
+    color: #535353;
+}
+
+.control-button.start::before {
+    content:"\eb9b"; 
+    font-family: "Material Symbols Outlined";
+    vertical-align: middle;
+}
+
 .control-button.play::before {
     content:"\e037"; 
+    font-family: "Material Symbols Outlined";
+    vertical-align: middle;
+}
+
+#wordNextButton::before {
+    content:"\e5e1"; 
+    font-family: "Material Symbols Outlined";
+    vertical-align: middle;
+}
+
+#wordPrevButton::before {
+    content:"\e5e0"; 
     font-family: "Material Symbols Outlined";
     vertical-align: middle;
 }
@@ -94,30 +138,52 @@ input[type=checkbox].onoff.check:checked + label:before{
     padding: 20px;
     border-bottom: 1px solid #3b415d;
     font-size: 3em;
+    position : fixed;
+    width: 100%;
+}
+
+#chapter_list {
+    position: fixed;
+    top: 110px;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
 }
 
 #word_card {
     padding: 10px;
+    position: fixed;
+    top: 110px;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+
+#wordDiv {
+    position : relative;
 }
 
 #word {
-    font-size: 6vw;
+    font-family: monospace;
+    font-size: 12vw;
     color: #b9b9b9;
     border: 3px solid #505565;
-    padding: 20px;
-    line-height: 1.6em;
-
+    padding: 12vw 0vw;
+    line-height: 1em;
+    font-weight: 800;
+    text-align: center;
+    height: 40%;
 }
 
 #mean {
     margin-top : 10px;
-    font-size: 6vw;
+    font-size: 10vw;
     color: #b9b9b9;
     border: 3px solid #323233;
     padding: 20px;
     height: 20%;
     line-height: 1.6em;
-
+    text-align: center;
 }
 
 #comment {
@@ -126,7 +192,30 @@ input[type=checkbox].onoff.check:checked + label:before{
     color: #b9b9b9;
     border: 3px solid #323233;
     padding: 20px;
-    height: 20%;
+    height: 18%;
     line-height: 1.6em;
 
+}
+
+#footer{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background-color: #202126;
+    padding: 8px;
+    border-top: 1px solid #3b415d;
+
+}
+
+#starWords{
+    position: fixed;
+    top: 0;
+    width: 600px;
+    background-color: #3c2626;
+    right: 0;
+    font-size: 9px;
+}
+
+.star-word {
+    padding: 4px;
 }

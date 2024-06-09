@@ -241,6 +241,9 @@ class Word {
                 case "ArrowUp" : 
                     _this.regStarWord(_this.todoWord);
                     break; 
+                case "ArrowDown" : 
+                    _this.deleteWord(_this.todoIdx); 
+                    break;     
 
             }
             
@@ -306,7 +309,7 @@ class Word {
         
 
         this.todoList = [];
-        this.todoIdx = 0;
+        this.todoIdx = -1; 
         for(let i=0; i<list.length; i++){
             let idx = $(list[i]).val()*1;
             this.todoList = this.todoList.concat( this.db[idx].list ); 
@@ -362,14 +365,14 @@ class Word {
         $("#mean").html("");
         $("#comment").html("");
         
-        //let idx = parseInt(Math.random()*10000%this.todoLen);
-        //console.log(this.todoIdx);
-        let word = this.todoList[this.todoIdx][this.conf.wordfirst?"word":"mean"];
-        let mean = this.todoList[this.todoIdx][this.conf.wordfirst?"mean":"word"];
-        this.todoIdx = this.todoIdx + 1;
+        this.todoIdx = this.todoIdx + 1; 
         if( this.todoIdx >= this.todoList.length ){
             this.todoIdx = 0;
         } 
+
+        let word = this.todoList[this.todoIdx][this.conf.wordfirst?"word":"mean"];
+        let mean = this.todoList[this.todoIdx][this.conf.wordfirst?"mean":"word"];
+        
         
         $("#word").html(word);
         this.todoWord = word;
@@ -378,7 +381,7 @@ class Word {
             window.speechSynthesis.cancel();
             speech(word, this.conf.soundSpeed);
         } 
-        
+         
         this.nextMean(mean);
         /*
         let _this = this;
@@ -410,6 +413,17 @@ class Word {
     regStarWord(word){
 
         $("#starWords").append( $("<span/>", {class:"star-word", text: word}) );
+    }
+
+    deleteWord(index){
+        if( this.todoList.length == 1 ) return;
+
+        this.todoList.splice(index, 1);
+        
+        if( this.todoIdx >= 1 ){
+            this.todoIdx = this.todoIdx - 1;
+        }
+        this.nextWord(true);
     }
 
     pause(){

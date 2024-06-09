@@ -207,7 +207,7 @@ input[type=checkbox].onoff.check:checked + label:before{
 
 }
 
-#starWords{
+#reportDiv{
     position: fixed;
     top: 0;
     width: 600px;
@@ -217,5 +217,5 @@ input[type=checkbox].onoff.check:checked + label:before{
 }
 
 .star-word {
-    padding: 4px;
+    padding: 4px; 
 }

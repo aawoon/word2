@@ -10,6 +10,7 @@ class Word {
     todoList = [];
     todoIdx = 0;
     todoWord = "";
+    strOrder = "Normal";
     exerCnt = 0;
     state = "ready"; // ready, playing, pause
 
@@ -197,8 +198,8 @@ class Word {
         
         wordCard.hide(); 
 
-        const starWords = $("<div/>", {id:"starWords", text:"AA"});
-        $("body").append(starWords);
+        const reportDiv = $("<div/>", {id:"reportDiv", text:"AA"});
+        $("body").append(reportDiv);
 
         this.buttons = {
             start : startButton,
@@ -239,7 +240,7 @@ class Word {
                     _this.nextWord(true);
                     break;        
                 case "ArrowUp" : 
-                    _this.regStarWord(_this.todoWord);
+                    //_this.regStarWord(_this.todoWord);
                     break; 
                 case "ArrowDown" : 
                     _this.deleteWord(_this.todoIdx); 
@@ -306,7 +307,7 @@ class Word {
         $("#chapter_list").hide();
         $("#control_panel").show();
         $("#word_card").show(); 
-        
+        this.strOrder = "Normal";
 
         this.todoList = [];
         this.todoIdx = -1; 
@@ -383,12 +384,19 @@ class Word {
         } 
          
         this.nextMean(mean);
+
+        this.refreshReport();
         /*
         let _this = this;
         this.tout1 = setTimeout(function(){
             _this.nextMean(mean);
         }, this.conf.delay);
         */
+    }
+
+    refreshReport(){
+        let report = `전체단어(${this.todoList.length}) 현재(${this.todoIdx+1}) 순서(${this.strOrder}))`;
+        $("#reportDiv").text(report); 
     }
 
     nextMean(mean){
@@ -410,10 +418,9 @@ class Word {
         this.exerCnt++;
     }
 
-    regStarWord(word){
-
-        $("#starWords").append( $("<span/>", {class:"star-word", text: word}) );
-    }
+    //regStarWord(word){
+    //    $("#starWords").append( $("<span/>", {class:"star-word", text: word}) );
+    //}
 
     deleteWord(index){
         if( this.todoList.length == 1 ) return;
@@ -458,6 +465,8 @@ class Word {
 
     shuffle() { 
         this.todoList.sort(() => Math.random() - 0.5);
+        this.strOrder = "Random";
+        this.refreshReport();
     }
 }
 
